@@ -1,0 +1,134 @@
+<!-- Keep index.html, style.css and script.js together. Open with VS Code Live Server. -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10171e">
+  <meta name="description" content="A little clarity for your day. Explore live weather, hourly and 14-day forecasts, and air quality for any city with Skyline.">
+  <title>Skyline Pro — Your world, in forecast</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23141e26'/%3E%3Ccircle cx='32' cy='30' r='15' fill='%23a5e5cc'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>try { document.documentElement.dataset.theme = localStorage.getItem('skyline-theme') || 'dark'; } catch {}</script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to weather</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite" aria-hidden="true"><defs>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-location" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 6-7 11-7 11S5 16 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.8 8.8 0 0 1 9.5 4a8.8 8.8 0 1 0 10.5 10.5Z"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 19h11a4 4 0 0 0 0-8 6 6 0 0 0-11-3 5.5 5.5 0 0 0 0 11Z"/></symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8h12a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h6a3 3 0 1 1-3 3"/></symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s-7 8-7 12a7 7 0 0 0 14 0c0-4-7-12-7-12Z"/></symbol>
+    <symbol id="i-thermometer" viewBox="0 0 24 24"><path d="M9 14V5a3 3 0 0 1 6 0v9a5 5 0 1 1-6 0Z"/><path d="M12 7v10"/><circle cx="12" cy="18" r="1"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h1m6 0h1"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4 20c2-5 6-8 12-12M5 16C-1 8 9 3 20 3c0 11-5 21-15 13Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m8 4 8 8-8 8"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 20V4m-6 6 6-6 6 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-5L3 9m0-6v6h6M4 13a8 8 0 0 0 14 5l3-3m0 6v-6h-6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2-5.5-2.9-5.5 2.9 1-6.2L3 9.6l6.2-.9L12 3Z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+    <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M3 19h18M5 15a7 7 0 0 1 14 0M12 2v6m-3-3 3-3 3 3M2 12h2m16 0h2M4 5l2 2m12 0 2-2"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-printer" viewBox="0 0 24 24"><path d="M6 8V3h12v5M6 17H3V9h18v8h-3M6 14h12v7H6zM17 11h1"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 6-10 6L2 9l10-6Zm-9 11 9 6 9-6M3 18l9 5 9-5"/></symbol>
+  </defs></svg>
+
+  <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
+  <aside id="sidebar" class="sidebar" aria-label="Weather navigation">
+    <a href="#" class="brand" aria-label="Skyline home"><span class="brand-mark"><svg class="icon"><use href="#i-sun"/></svg></span><span>skyline<span class="brand-dot">.</span></span></a>
+    <p class="sidebar-label">YOUR WEATHER STUDIO</p>
+    <nav class="space-y-2" aria-label="Main navigation">
+      <a href="#overview" class="nav-link active" data-nav="overview"><svg class="icon"><use href="#i-sun"/></svg>Overview<span class="nav-dot"></span></a>
+      <a href="#hourly" class="nav-link" data-nav="hourly"><svg class="icon"><use href="#i-clock"/></svg>Hourly forecast</a>
+      <a href="#weekly" class="nav-link" data-nav="weekly"><svg class="icon"><use href="#i-calendar"/></svg>14-day outlook</a>
+      <a href="#air-quality" class="nav-link" data-nav="air-quality"><svg class="icon"><use href="#i-leaf"/></svg>Air quality</a>
+      <a href="#explore" class="nav-link" data-nav="explore"><svg class="icon"><use href="#i-map"/></svg>Map & comparison</a>
+    </nav>
+    <div class="flex items-center justify-between mt-10 mb-4"><p class="sidebar-label !m-0">SAVED PLACES</p><button id="addPlace" class="small-icon-button" aria-label="Search for a place to save"><svg class="icon"><use href="#i-plus"/></svg></button></div>
+    <div id="savedPlaces" class="space-y-3"><p class="text-sm muted">Loading your places…</p></div>
+    <p class="saved-hint">Your favorite corners of the world.</p>
+    <div class="sidebar-bottom"><div class="flex items-center gap-2"><span class="status-dot"></span><span>Always looking ahead</span></div><p>One forecast. A world of possibility.</p><button id="aboutButton" class="about-button"><svg class="icon"><use href="#i-info"/></svg>About Skyline</button></div>
+  </aside>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <button id="menuButton" class="icon-button xl:hidden" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><svg class="icon"><use href="#i-menu"/></svg></button>
+      <div class="search-container">
+        <form id="searchForm" role="search" autocomplete="off"><svg class="icon search-icon"><use href="#i-search"/></svg><label class="sr-only" for="citySearch">Search a city</label><input id="citySearch" type="search" placeholder="Search a city or postcode…" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="searchResults" maxlength="100"><kbd class="search-shortcut">/</kbd><button class="sr-only" type="submit">Search</button></form>
+        <div id="searchResults" class="search-results" role="listbox" aria-label="Matching cities" hidden></div>
+      </div>
+      <button id="locationButton" class="location-button"><svg class="icon"><use href="#i-location"/></svg><span class="hidden sm:inline">My location</span></button>
+      <div class="topbar-divider hidden sm:block"></div>
+      <div class="unit-switch" aria-label="Temperature unit"><button id="celsiusButton" class="active" aria-pressed="true">°C</button><button id="fahrenheitButton" aria-pressed="false">°F</button></div>
+      <button id="themeButton" class="icon-button" aria-label="Switch to light theme"><svg class="icon"><use id="themeIcon" href="#i-sun"/></svg></button>
+    </header>
+
+    <main id="main" class="main-content">
+      <section id="overview" aria-labelledby="pageTitle" class="scroll-mt-6">
+        <div class="page-heading flex flex-wrap items-end justify-between gap-4">
+          <div><p class="eyebrow">A WORLD OF WEATHER. ONE BEAUTIFUL VIEW.</p><h1 id="pageTitle">Your world, <span>in forecast.</span></h1><p class="page-subtitle" id="todayDate">The forecast for wherever life takes you.</p></div>
+          <div class="flex items-center gap-2"><button id="exportButton" class="icon-button" aria-label="Download forecast as CSV" title="Download forecast CSV"><svg class="icon"><use href="#i-download"/></svg></button><button id="printButton" class="icon-button" aria-label="Print forecast" title="Print forecast"><svg class="icon"><use href="#i-printer"/></svg></button><span id="dataStatus" class="data-status"><span class="status-dot"></span>Connecting</span><button id="refreshButton" class="icon-button" aria-label="Refresh weather"><svg class="icon"><use href="#i-refresh"/></svg></button></div>
+        </div>
+        <div class="quick-cities" aria-label="Quick city search"><span>EXPLORE</span><button data-quick="Bahawalpur">Bahawalpur</button><button data-quick="Karachi">Karachi</button><button data-quick="Islamabad">Islamabad</button><button data-quick="Dubai">Dubai</button><button data-quick="London">London</button><span class="pro-badge">PRO WEATHER STUDIO</span></div>
+        <div id="errorBanner" class="error-banner" role="alert" hidden><svg class="icon"><use href="#i-info"/></svg><div><strong id="errorTitle">Weather is taking a moment</strong><p id="errorMessage"></p></div><button id="retryButton" class="text-button">Try again</button><button id="demoButton" class="text-button">View demo</button></div>
+        <div class="hero-grid">
+          <article class="weather-hero" id="weatherHero" data-sky="day" aria-labelledby="locationName" aria-busy="true">
+            <div class="sky-art" aria-hidden="true"><div class="sky-stars"></div><div class="sun-halo"></div><div class="sun-orb"></div><div class="sky-cloud cloud-one"></div><div class="sky-cloud cloud-two"></div><div class="landscape landscape-back"></div><div class="landscape landscape-front"></div><div class="landscape landscape-near"></div><div class="rain-lines"></div></div>
+            <div class="hero-content">
+              <div class="flex justify-between items-start gap-4"><div><p class="hero-overline"><svg class="icon"><use href="#i-pin"/></svg><span id="locationRegion">PUNJAB, PAKISTAN</span></p><h2 id="locationName">Bahawalpur</h2><p id="localTime" class="hero-time">Loading your local forecast…</p></div><button id="favoriteButton" class="hero-favorite" aria-label="Save current city" aria-pressed="false"><svg class="icon"><use href="#i-star"/></svg></button></div>
+              <div class="hero-weather"><div class="hero-temperature"><span id="currentTemp">—</span><span id="heroUnit">°</span></div><div id="heroWeatherIcon" class="hero-weather-icon"></div></div>
+              <p id="currentDescription" class="hero-description">Finding a little clarity…</p><div class="hero-meta"><span>Feels like <b id="feelsLike">—</b></span><span class="hero-meta-dot">·</span><span>H: <b id="highTemp">—</b></span><span>L: <b id="lowTemp">—</b></span></div>
+              <div class="hero-footer"><span><svg class="icon"><use href="#i-wind"/></svg><span id="heroWind">—</span></span><span><svg class="icon"><use href="#i-drop"/></svg><span id="heroRain">—</span></span><span class="hero-updated" id="updatedTime">Awaiting forecast</span></div>
+            </div>
+          </article>
+          <article class="panel day-ahead"><div class="panel-heading"><h2>The day ahead</h2><span class="tiny-tag">TODAY</span></div><div class="outlook-icon" id="outlookIcon"><svg class="icon"><use href="#i-sun"/></svg></div><h3 id="outlookTitle">A fresh perspective</h3><p id="outlookDescription">Your daily outlook will appear once your weather arrives.</p><div class="day-ahead-divider"></div><div class="flex items-center justify-between"><span class="muted text-xs">CHANCE OF RAIN</span><strong id="dayRain">—</strong></div><div class="meter rain-meter"><span id="rainMeter"></span></div><div class="outlook-bottom"><svg class="icon"><use href="#i-calendar"/></svg><a href="#weekly">Make a plan for the week<svg class="icon"><use href="#i-arrow"/></svg></a></div></article>
+        </div>
+      </section>
+
+      <section id="hourly" class="panel hourly-panel scroll-mt-6" aria-labelledby="hourlyTitle">
+        <div class="panel-heading flex-wrap gap-3"><div class="flex items-center gap-3"><h2 id="hourlyTitle">Hourly forecast</h2><label class="sr-only" for="hoursSelect">Forecast hours</label><select id="hoursSelect" class="compact-select"><option value="24">Next 24 hours</option><option value="48">Next 48 hours</option></select></div><div class="chart-tabs" aria-label="Hourly chart type"><button class="active" id="temperatureTab" aria-pressed="true">Temperature</button><button id="rainTab" aria-pressed="false">Rain</button><button id="windTab" aria-pressed="false">Wind</button><button id="humidityTab" aria-pressed="false">Humidity</button></div></div>
+        <div class="chart-topline"><span id="chartSummary">Your next 24 hours, beautifully clear.</span><span class="chart-legend"><i></i><span id="chartLegend">Temperature</span></span></div>
+        <div class="hourly-scroll" id="hourlyScroll"><div class="hourly-inner"><div id="hourlyChart" class="hourly-chart" role="img" aria-label="Hourly forecast is loading"><div class="chart-loading">Your forecast is on its way<span class="loading-dots">…</span></div></div><div id="hourlyCards" class="hourly-cards"></div></div></div>
+        <div class="hourly-bottom"><span><svg class="icon"><use href="#i-drop"/></svg>Rain probability shown below each hour</span><div class="flex gap-1"><button id="hourlyPrev" class="small-icon-button" aria-label="Scroll forecast earlier"><svg class="icon rotate-180"><use href="#i-arrow"/></svg></button><button id="hourlyNext" class="small-icon-button" aria-label="Scroll forecast later"><svg class="icon"><use href="#i-arrow"/></svg></button></div></div>
+      </section>
+
+      <section class="detail-strip" aria-label="More weather details"><article><span>Sea-level pressure</span><strong id="pressureValue">—</strong><small>hPa</small></article><article><span>Dew point</span><strong id="dewPointValue">—</strong><small id="dewPointUnit">°C</small></article><article><span>Cloud cover</span><strong id="cloudCoverValue">—</strong><small>%</small></article><article><span>Precipitation today</span><strong id="precipitationValue">—</strong><small id="precipitationUnit">mm</small></article></section>
+      <section id="planner" class="planner-panel panel"><div class="planner-heading"><span class="planner-symbol"><svg class="icon"><use href="#i-sun"/></svg></span><div><p class="eyebrow">MAKE ROOM FOR A LITTLE OUTSIDE</p><h2>Your next clear window</h2></div><span class="tiny-tag">FORECAST INSIGHT</span></div><div id="plannerContent" class="planner-content"><p class="muted">Finding the best 3-hour window in your forecast…</p></div><p class="planner-note">Suggested from forecast rain, wind, daylight, and temperature. Conditions can change.</p></section>
+      <div class="forecast-grid">
+        <section id="weekly" class="panel weekly-panel scroll-mt-6" aria-labelledby="weeklyTitle"><div class="panel-heading"><h2 id="weeklyTitle">The next 7 days</h2><div class="chart-tabs"><button id="sevenDayButton" class="active" aria-pressed="true">7 days</button><button id="fourteenDayButton" aria-pressed="false">14 days</button></div></div><p class="section-note">A bigger picture for your plans.</p><div id="weeklyList" class="weekly-list"><div class="empty-state">Loading your weekly forecast…</div></div><div id="dayDetail" class="day-detail" hidden></div></section>
+        <section class="highlights" aria-labelledby="highlightsTitle"><div class="highlights-heading"><h2 id="highlightsTitle">Today's highlights</h2><span class="muted text-xs">THE DETAILS THAT MATTER</span></div><div class="highlights-grid">
+          <article class="panel highlight-card"><div class="highlight-label"><svg class="icon"><use href="#i-drop"/></svg><h3>Humidity</h3></div><div class="highlight-value"><span id="humidity">—</span><small>%</small></div><div class="meter"><span id="humidityMeter"></span></div><p id="humidityNote">Waiting for conditions</p></article>
+          <article class="panel highlight-card"><div class="highlight-label"><svg class="icon"><use href="#i-wind"/></svg><h3>Wind speed</h3></div><div class="highlight-value"><span id="windSpeed">—</span><small id="windUnit">km/h</small></div><div class="wind-detail"><svg class="icon wind-arrow" id="windArrow"><use href="#i-arrow-up"/></svg><span id="windDirection">—</span><span id="windGust">Gusts —</span></div><p>Direction the wind comes from</p></article>
+          <article class="panel highlight-card"><div class="highlight-label"><svg class="icon"><use href="#i-sun"/></svg><h3>UV index</h3></div><div class="highlight-value"><span id="uvIndex">—</span><span id="uvLabel" class="value-tag">—</span></div><div class="uv-scale"><span id="uvMarker"></span></div><p>Today's forecast maximum</p></article>
+          <article class="panel highlight-card"><div class="highlight-label"><svg class="icon"><use href="#i-eye"/></svg><h3>Visibility</h3></div><div class="highlight-value"><span id="visibility">—</span><small id="visibilityUnit">km</small></div><div class="visibility-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p id="visibilityNote">Waiting for conditions</p></article>
+        </div></section>
+      </div>
+
+      <div class="bottom-grid">
+        <section id="air-quality" class="panel air-panel scroll-mt-6" aria-labelledby="airTitle"><div class="panel-heading"><div class="flex items-center gap-2"><svg class="icon text-mint"><use href="#i-leaf"/></svg><h2 id="airTitle">Air quality</h2></div><span class="tiny-tag">US AQI</span></div><div class="air-main"><div class="flex items-center gap-4"><span id="aqiNumber" class="aqi-number">—</span><div><strong id="aqiLabel">Loading air quality</strong><p id="aqiDescription">A clearer view of the air around you.</p></div></div></div><div class="aqi-scale"><span id="aqiMarker"></span></div><div class="scale-labels"><span>Good</span><span>Hazardous</span></div><div class="pollutants"><div><span>PM2.5</span><strong id="pm25">—</strong><small>μg/m³</small></div><div><span>PM10</span><strong id="pm10">—</strong><small>μg/m³</small></div><div><span>Ozone</span><strong id="ozone">—</strong><small>μg/m³</small></div><div><span>NO₂</span><strong id="no2">—</strong><small>μg/m³</small></div></div><p id="airSource" class="air-source">Model forecast · CAMS via Open-Meteo</p></section>
+        <section class="panel sun-panel" aria-labelledby="sunTitle"><div class="panel-heading"><h2 id="sunTitle">Sunrise & sunset</h2><span id="daylightLabel" class="tiny-tag">DAYLIGHT</span></div><div class="sun-path-wrap"><svg class="sun-path" viewBox="0 0 360 125" role="img" aria-label="Sun's progress between sunrise and sunset"><path class="sun-path-track" d="M25 108 Q180 -62 335 108"/><path id="sunProgressPath" class="sun-path-progress" d="M25 108 Q180 -62 335 108" pathLength="100"/><path class="sun-horizon" d="M20 109h320"/><g id="sunPosition" transform="translate(25 108)"><circle r="15" fill="#e8bb77" fill-opacity=".12"/><circle r="7" fill="#e8bb77"/></g></svg><span id="sunPathLabel">A little light goes a long way.</span></div><div class="sun-times"><div><svg class="icon"><use href="#i-sunrise"/></svg><span>Sunrise<strong id="sunrise">—</strong></span></div><div><svg class="icon rotate-180"><use href="#i-sunrise"/></svg><span>Sunset<strong id="sunset">—</strong></span></div></div><div class="sun-footer"><svg class="icon"><use href="#i-clock"/></svg><span id="daylightDuration">Waiting for daylight hours</span></div></section>
+      </div>
+
+      <section id="explore" class="explore-grid scroll-mt-6" aria-label="Explore your forecast"><article class="panel comparison-panel"><div class="panel-heading"><h2>A tale of two cities</h2><span class="tiny-tag">COMPARE</span></div><p class="section-note">Compare your forecast with another saved place.</p><label for="compareSelect" class="sr-only">Choose a city to compare</label><select id="compareSelect" class="comparison-select"></select><div id="comparisonContent" class="comparison-content"><p class="muted">Save another city to compare forecasts.</p></div></article><article class="panel map-panel"><div class="panel-heading"><h2>Around your forecast</h2><span class="tiny-tag">LOCATION MAP</span></div><p class="section-note" id="mapCaption">Explore the location behind your weather.</p><div class="map-wrapper"><iframe id="locationMap" title="Selected location on OpenStreetMap" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe><span id="mapWeatherBadge" class="map-weather-badge">Awaiting forecast</span></div><a id="openMapLink" href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer" class="map-link">Explore on OpenStreetMap ↗</a></article></section>
+      <footer class="footer"><span class="footer-brand">skyline<span>.</span><span class="footer-tagline">Find your silver lining.</span></span><span>Weather by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> · Air quality by <a href="https://atmosphere.copernicus.eu/" target="_blank" rel="noopener noreferrer">CAMS</a> · Locations by <a href="https://www.geonames.org/" target="_blank" rel="noopener noreferrer">GeoNames</a></span></footer>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="aboutDialog" class="about-dialog"><div class="flex items-center justify-between"><h2 class="font-display text-2xl font-semibold">A little more about Skyline Pro.</h2><button id="closeAbout" class="icon-button" aria-label="Close about dialog"><svg class="icon"><use href="#i-close"/></svg></button></div><p>Weather for the places you care about, presented with a little more clarity. Search anywhere, save your cities, and see what the day has in store.</p><p>Conditions and air quality are model estimates, rather than measurements from a station at your exact location. Local times follow the selected place's time zone. Forecasts update when you refresh and every 15 minutes while this page is open. The outdoor window is a suggestion derived from the forecast, rather than an official alert. Map tiles are supplied by OpenStreetMap.</p><p>Saved places, units, and your theme stay in this browser. Location permission is requested only when you choose “My location”.</p><a class="text-button" href="https://open-meteo.com/en/docs" target="_blank" rel="noopener noreferrer">Explore the weather data ↗</a></dialog>
+  <noscript><div class="noscript-message">Please enable JavaScript to load live weather and search for cities.</div></noscript>
+</body>
+</html>
